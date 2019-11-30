@@ -1,0 +1,14 @@
+prefix=E:/DevTools/mingw-w64/x86_64-7.3.0-posix-seh-rt_v5-rev0/mingw64/x86_64-w64-mingw32
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+
+Name: Qt5 Test
+Description: Qt Test module
+Version: 5.9.7
+Libs: -L${libdir} -lQt5Testd 
+Libs.private: -Lc:\openssl\lib -LC:\icu4c\lib\x64 -LC:\opengl -LF:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libQt5Cored.a -lmpr -lversion -lws2_32 -lkernel32 -luser32 -lshell32 -luuid -lole32 -ladvapi32 -lwinmm F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libqtpcre2d.a  
+Cflags: -I${includedir}/QtTest -I${includedir}
+Requires: Qt5Core
+

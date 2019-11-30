@@ -1,0 +1,15 @@
+prefix=E:/DevTools/mingw-w64/x86_64-7.3.0-posix-seh-rt_v5-rev0/mingw64/x86_64-w64-mingw32
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+host_bins=E:/DevTools/mingw-w64/x86_64-7.3.0-posix-seh-rt_v5-rev0/mingw64/bin
+qt_config=release c++11 dbus no-pkg-config no-qml-debug release_tools static stl
+
+Name: Qt5 Core
+Description: Qt Core module
+Version: 5.9.7
+Libs: -L${libdir} -lQt5Cored 
+Libs.private: -Lc:\openssl\lib -LC:\icu4c\lib\x64 -LC:\opengl -lmpr -lversion -lws2_32 -lkernel32 -luser32 -lshell32 -luuid -lole32 -ladvapi32 -lwinmm -LF:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libqtpcre2d.a -Lc:\openssl\lib -LC:\icu4c\lib\x64 -LC:\opengl 
+Cflags: -I${includedir}/QtCore -I${includedir}
+

@@ -1,0 +1,14 @@
+prefix=/usr/x86_64-w64-mingw32
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+
+Name: Qt5 Multimedia
+Description: Qt Multimedia module
+Version: 5.9.7
+Libs: -lQt5Multimediad 
+Libs.private: -L/usr/x86_64-w64-mingw32/lib -L/home/luolin/Desktop/openssl  /libQt5Networkd.a -ldnsapi -liphlpapi -lcrypt32 /libQt5Guid.a -lcomdlg32 -loleaut32 -limm32 -lglu32 -lopengl32 -lgdi32 /libqtlibpngd.a /libqtharfbuzzd.a /libQt5Cored.a -lmpr -lversion -lws2_32 -lkernel32 -luser32 -lshell32 -luuid -lole32 -ladvapi32 -lwinmm /libqtpcre2d.a -luuid 
+Cflags: -I${includedir}/QtMultimedia 
+Requires: Qt5Core Qt5Network Qt5Gui
+

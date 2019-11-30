@@ -1,0 +1,14 @@
+prefix=E:/DevTools/mingw-w64/x86_64-7.3.0-posix-seh-rt_v5-rev0/mingw64/x86_64-w64-mingw32
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+
+Name: Qt5 Gamepad
+Description: Qt Gamepad module
+Version: 5.9.7
+Libs: -L${libdir} -lQt5Gamepadd 
+Libs.private: -Lc:\openssl\lib -LC:\icu4c\lib\x64 -LC:\opengl -LF:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libQt5Guid.a -llibEGLd -llibGLESv2d F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libqtlibpngd.a F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libqtharfbuzzd.a F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libQt5Cored.a -lmpr -lversion -lkernel32 -lshell32 F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libqtpcre2d.a F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\liblibEGLd.a F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\liblibGLESv2d.a -lcomdlg32 -loleaut32 -limm32 -lwinmm -lws2_32 -lole32 -luuid -ladvapi32 -ld3d9 -ldxguid F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libtranslatord.a F:\boot\qtsrc\qt-everywhere-opensource-src-5.9.7\qtbase\lib\libpreprocessord.a -lgdi32 -luser32  
+Cflags: -I${includedir}/QtGamepad -I${includedir}
+Requires: Qt5Core Qt5Gui
+
