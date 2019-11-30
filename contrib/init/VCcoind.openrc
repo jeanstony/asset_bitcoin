@@ -1,0 +1,92 @@
+#!/sbin/openrc-run
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/VCcoin/.VCcoin" ]; then
+	VCCOIND_DEFAULT_DATADIR="/var/lib/VCcoin/.VCcoin"
+else
+	VCCOIND_DEFAULT_DATADIR="/var/lib/VCcoind"
+fi
+
+VCCOIND_CONFIGFILE=${VCCOIND_CONFIGFILE:-/etc/VCcoin/VCcoin.conf}
+VCCOIND_PIDDIR=${VCCOIND_PIDDIR:-/var/run/VCcoind}
+VCCOIND_PIDFILE=${VCCOIND_PIDFILE:-${VCCOIND_PIDDIR}/VCcoind.pid}
+VCCOIND_DATADIR=${VCCOIND_DATADIR:-${VCCOIND_DEFAULT_DATADIR}}
+VCCOIND_USER=${VCCOIND_USER:-${VCCOIN_USER:-VCcoin}}
+VCCOIND_GROUP=${VCCOIND_GROUP:-VCcoin}
+VCCOIND_BIN=${VCCOIND_BIN:-/usr/bin/VCcoind}
+VCCOIND_NICE=${VCCOIND_NICE:-${NICELEVEL:-0}}
+VCCOIND_OPTS="${VCCOIND_OPTS:-${VCCOIN_OPTS}}"
+
+name="Vccoin Core Daemon"
+description="Vccoin cryptocurrency P2P network daemon"
+
+command="/usr/bin/VCcoind"
+command_args="-pid=\"${VCCOIND_PIDFILE}\" \
+		-conf=\"${VCCOIND_CONFIGFILE}\" \
+		-datadir=\"${VCCOIND_DATADIR}\" \
+		-daemon \
+		${VCCOIND_OPTS}"
+
+required_files="${VCCOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${VCCOIND_USER} \
+			-N ${VCCOIND_NICE} -w 2000"
+pidfile="${VCCOIND_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${VCCOIND_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${VCCOIND_USER}:${VCCOIND_GROUP}" \
+	"${VCCOIND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${VCCOIND_USER}:${VCCOIND_GROUP}" \
+	"${VCCOIND_PIDDIR}"
+
+	checkpath -f \
+	-o ${VCCOIND_USER}:${VCCOIND_GROUP} \
+	-m 0660 \
+	${VCCOIND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${VCCOIND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run VCcoind."
+		eerror "The setting must appear in ${VCCOIND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Vccoin Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

@@ -1,0 +1,33 @@
+# /etc/conf.d/VCcoind: config file for /etc/init.d/VCcoind
+
+# Config file location
+#VCCOIND_CONFIGFILE="/etc/VCcoin/VCcoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $VCCOIND_USER)
+#VCCOIND_PIDDIR="/var/run/VCcoind"
+
+# What filename to give the pidfile
+#VCCOIND_PIDFILE="${VCCOIND_PIDDIR}/VCcoind.pid"
+
+# Where to write VCcoind data (be mindful that the blockchain is large)
+#VCCOIND_DATADIR="/var/lib/VCcoind"
+
+# User and group to own VCcoind process
+#VCCOIND_USER="VCcoin"
+#VCCOIND_GROUP="VCcoin"
+
+# Path to VCcoind executable
+#VCCOIND_BIN="/usr/bin/VCcoind"
+
+# Nice value to run VCcoind under
+#VCCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#VCCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for VCcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+VCCOIND_SIGTERM_TIMEOUT=60
