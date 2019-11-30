@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file alias="AssetDelegate.ui.qml">res/qml/overviewpage/AssetDelegate.ui.qml</file>
+        <file alias="AssetDialog.qml">res/qml/overviewpage/AssetDialog.qml</file>
+        <file alias="AssetForm.ui.qml">res/qml/overviewpage/AssetForm.ui.qml</file>
+        <file alias="AssetList.qml">res/qml/overviewpage/AssetList.qml</file>
+        <file alias="AssetView.ui.qml">res/qml/overviewpage/AssetView.ui.qml</file>
+        <file alias="test">test.qml</file>  
+        <file alias="AssetModel.qml">res/qml/overviewpage/AssetModel.qml</file>  
+        <file alias="SectionDelegate.ui.qml">res/qml/overviewpage/SectionDelegate.ui.qml</file>
+    </qresource>
+</RCC> 
